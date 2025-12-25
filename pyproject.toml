@@ -6,7 +6,7 @@ requires = ["setuptools>=42", "wheel", "setuptools_scm[tomli]>=6.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lmms_eval"
+name = "vsi_bench_eval"
 version = "0.2.3"
 authors = [
     { name = "LMMMs-Lab Evaluation Team", email = "lmms-lab@outlook.com" },
@@ -18,7 +18,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 dependencies = [
     "accelerate>=0.29.1",
@@ -44,13 +44,12 @@ dependencies = [
     "openai",
     "opencv-python-headless",
     "av",
-    "hf_transfer",
     "nltk",
     "sentencepiece==0.1.99",
     "yt-dlp",
     "pycocoevalcap",
     "tqdm-multiprocess",
-    "transformers==4.45.0.dev0",
+    "transformers>=4.39.2",
     "transformers-stream-generator",
     "zstandard",
     "pillow",
@@ -69,7 +68,7 @@ dependencies = [
     "packaging",
     "decord",
     "zss",
-    "protobuf==3.20",
+    "protobuf>=4.21.6,<5.0.0",
 ]
 
 [project.optional-dependencies]
@@ -95,10 +94,17 @@ reka = [
     "reka-api",
 ]
 all = [
-    "llava_next",
-    "vila",
-    "gemini",
-    "reka",
+    "deepspeed",
+    "s2wrapper@git+https://github.com/bfshi/scaling_on_scales",
+    "google-generativeai",
+    "httpx==0.23.3",
+    "reka-api",
+    "pywsd",
+    "spacy",
+    "anls",
+    "rouge",
+    "capture_metric",
+    "Levenshtein",
 ]
 
 [tool.setuptools.packages.find]
