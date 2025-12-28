@@ -35,7 +35,7 @@ from lmms_eval.evaluator import request_caching_arg_to_dict
 from lmms_eval.loggers import EvaluationTracker, WandbLogger
 
 # from lmms_eval.logging_utils import WandbLogger
-from lmms_eval.tasks import TaskManager
+from lmms_eval.tasks import TaskManager, get_task_dict
 from lmms_eval.utils import (
     handle_non_serializable,
     make_table,
@@ -425,7 +425,7 @@ def cli_evaluate_single(args: Union[argparse.Namespace, None] = None) -> None:
         eval_logger.error("Need to specify task to evaluate.")
         sys.exit()
     elif args.tasks == "list":
-        eval_logger.info("Available Tasks:\n - {}".format(f"\n - ".join(sorted(task_manager.list_all_tasks()))))
+        eval_logger.info("Available Tasks:\n - {}".format(f"\n - ".join(sorted(task_manager.all_tasks))))
         sys.exit()
     elif args.tasks == "list_groups":
         eval_logger.info(task_manager.list_all_tasks(list_subtasks=False, list_tags=False))
@@ -441,7 +441,7 @@ def cli_evaluate_single(args: Union[argparse.Namespace, None] = None) -> None:
             "\n" + "=" * 70 + "\n" + "\n\tYou are trying to check all the numbers in each task." + "\n\tThis action will download the complete dataset." + "\n\tIf the results are not clear initially, call this again." + "\n\n" + "=" * 70
         )
         eval_logger.info(log_message)
-        for task_name in sorted(task_manager.list_all_tasks()):
+        for task_name in sorted(task_manager.all_tasks):
             try:
                 task_dict = get_task_dict([task_name], model_name="llava")
                 task_obj = task_dict[task_name]
