@@ -443,7 +443,7 @@ def cli_evaluate_single(args: Union[argparse.Namespace, None] = None) -> None:
         eval_logger.info(log_message)
         for task_name in sorted(task_manager.all_tasks):
             try:
-                task_dict = get_task_dict([task_name], model_name="llava")
+                task_dict = get_task_dict([task_name], task_manager=task_manager)
                 task_obj = task_dict[task_name]
                 if type(task_obj) == tuple:
                     group, task_obj = task_obj
