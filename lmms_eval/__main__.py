@@ -70,7 +70,7 @@ def _int_or_none_list_arg_type(min_len: int, max_len: int, defaults: str, value:
     elif num_items < min_len or num_items > max_len:
         raise argparse.ArgumentTypeError(f"Argument requires {max_len} integers or None, separated by '{split_char}'")
     elif num_items != max_len:
-        logging.warning(f"Argument requires {max_len} integers or None, separated by '{split_char}'. " "Missing values will be filled with defaults.")
+        eval_logger.warning(f"Argument requires {max_len} integers or None, separated by '{split_char}'. " "Missing values will be filled with defaults.")
         default_items = [parse_value(v) for v in defaults.split(split_char)]
         items.extend(default_items[num_items:])  # extend items list with missing defaults
 
